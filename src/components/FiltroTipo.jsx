@@ -8,7 +8,9 @@ function FiltroTipo({ filtroActual, setFiltro }) {
       {/* botones simples para cambiar el estado del filtro en App */}
       {categorias.map(categoria => (
         <button
+          type="button"
           key={categoria}
+          aria-pressed={filtroActual === categoria}
           className={`boton-filtro ${filtroActual === categoria ? 'activo' : ''}`}
           onClick={() => setFiltro(categoria)}
         >

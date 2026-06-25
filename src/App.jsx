@@ -9,14 +9,28 @@ function App() {
   const [busqueda, setBusqueda] = useState('')
   const [filtro, setFiltro] = useState('Todos')
 
-  // limpiamos los espacios del buscador por seguridad antes de filtrar
-  const textoLimpio = busqueda.trim().toLowerCase()
+  // normalizador para quitar acentos y comparar en minúsculas
+  const normalizar = (s) => (
+    String(s || '')
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+  )
+
+  // limpiamos y normalizamos el buscador por seguridad antes de filtrar
+  const textoLimpio = normalizar(busqueda.trim())
+  const filtroNormalizado = normalizar(filtro)
 
   const eventosFiltrados = eventos.filter(evento => {
-    const coincideNombre = evento.nombre.toLowerCase().includes(textoLimpio)
-    const coincideTipo = filtro === 'Todos' || evento.tipo === filtro
+    const nombreNorm = normalizar(evento.nombre)
+    const tipoNorm = normalizar(evento.tipo)
+    const coincideNombre = nombreNorm.includes(textoLimpio)
+    const coincideTipo = filtroNormalizado === 'todos' || tipoNorm === filtroNormalizado
     return coincideNombre && coincideTipo
   })
+
+  // logs para debug de filtro (puede quitarse luego)
+  console.log('filtro:', filtro, '->', filtroNormalizado, 'resultados:', eventosFiltrados.length)
 
   return (
     <div>
