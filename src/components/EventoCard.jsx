@@ -1,31 +1,41 @@
 import PropTypes from 'prop-types';
 
+const coloresTipo = {
+  Concierto: { color: '#4338ca', fondo: '#eef2ff' },
+  Teatro: { color: '#be185d', fondo: '#fce7f3' },
+  Exposición: { color: '#047857', fondo: '#d1fae5' }
+};
+
 function EventoCard({ nombre, lugar, duracion, tipo, descripcion, fechas, esGratuito, selected, onSelect }) {
-  // si la prop esGratuito es true, mostramos una etiqueta especial y cambiamos el estilo
-  const estiloCard = {
-    border: esGratuito ? '2px solid #2ecc71' : '1px solid #ddd',
-    padding: '0.8rem',
-    cursor: 'pointer'
-  };
+  const estiloTipo = coloresTipo[tipo] || { color: '#0f172a', fondo: '#e2e8f0' };
 
   return (
     <article
       className={`evento-card ${selected ? 'selected' : ''}`}
-      style={estiloCard}
       onClick={onSelect}
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter') onSelect()
       }}
     >
-      {esGratuito && <span className="etiqueta-gratis">GRATIS</span>}
+      <div className="evento-accent" style={{ backgroundColor: estiloTipo.color }} />
 
-      <h3>{nombre}</h3>
-      <p><strong>Tipo:</strong> {tipo}</p>
-      <p><strong>Lugar:</strong> {lugar}</p>
-      {duracion > 0 && <p><strong>Duración:</strong> {duracion} minutos</p>}
-      <p><strong>Descripción:</strong> {descripcion}</p>
-      <p><strong>Fechas:</strong> {fechas.join(', ')}</p>
+      <div className="evento-contenido">
+        <div className="evento-meta-top">
+          <span className="chip tipo-chip" style={{ color: estiloTipo.color, backgroundColor: estiloTipo.fondo }}>{tipo}</span>
+          {esGratuito && <span className="etiqueta-gratis">GRATIS</span>}
+        </div>
+
+        <h3>{nombre}</h3>
+        <p className="evento-subtitulo">{lugar}</p>
+
+        <div className="evento-datos">
+          {duracion > 0 && <span className="chip duracion-chip">{duracion} minutos</span>}
+          <span className="chip fechas-chip">{fechas.join(' • ')}</span>
+        </div>
+
+        <p className="evento-descripcion">{descripcion}</p>
+      </div>
     </article>
   );
 }
