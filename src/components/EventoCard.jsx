@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types';
 
-function EventoCard({ nombre, lugar, duracion, tipo, descripcion, fechas, esGratuito }) {
+function EventoCard({ nombre, lugar, duracion, tipo, descripcion, fechas, esGratuito, selected, onSelect }) {
   // si la prop esGratuito es true, mostramos una etiqueta especial y cambiamos el estilo
-  const estiloCard = esGratuito ? { border: '2px solid #2ecc71', padding: '0.6rem' } : { border: '1px solid #ddd', padding: '0.6rem' };
+  const estiloCard = {
+    border: esGratuito ? '2px solid #2ecc71' : '1px solid #ddd',
+    padding: '0.8rem',
+    cursor: 'pointer'
+  };
 
   return (
-    <article className="evento-card" style={estiloCard}>
+    <article
+      className={`evento-card ${selected ? 'selected' : ''}`}
+      style={estiloCard}
+      onClick={onSelect}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') onSelect()
+      }}
+    >
       {esGratuito && <span className="etiqueta-gratis">GRATIS</span>}
 
       <h3>{nombre}</h3>
@@ -25,11 +37,15 @@ EventoCard.propTypes = {
   tipo: PropTypes.string.isRequired,
   descripcion: PropTypes.string.isRequired,
   fechas: PropTypes.arrayOf(PropTypes.string).isRequired,
-  esGratuito: PropTypes.bool
+  esGratuito: PropTypes.bool,
+  selected: PropTypes.bool,
+  onSelect: PropTypes.func
 };
 
 EventoCard.defaultProps = {
-  esGratuito: false
+  esGratuito: false,
+  selected: false,
+  onSelect: () => {}
 };
 
 export default EventoCard;
