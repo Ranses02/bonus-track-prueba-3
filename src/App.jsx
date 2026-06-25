@@ -1,4 +1,5 @@
 import { eventos } from './data/eventos'
+import ListaEventos from './components/ListaEventos'
 import './App.css'
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
   return (
     <div>
       <h1>Agenda Cultural</h1>
-      <p>Abierto en localhost:5173</p>
+      <ListaEventos eventos={eventos} />
     </div>
   )
 }
