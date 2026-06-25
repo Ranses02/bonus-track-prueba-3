@@ -182,3 +182,76 @@
     border-right-color: var(--border);
   }
 }
+
+/* Estilos para lista de eventos y tarjetas */
+.lista-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.evento-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.evento-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.etiqueta-gratis {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #2ecc71;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.contador-gratis {
+  margin: 12px 0;
+  background: rgba(46, 204, 113, 0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.filtro-tipo {
+  margin: 12px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.boton-filtro {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boton-filtro.activo {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin: 8px 0 12px;
+  box-sizing: border-box;
+}
