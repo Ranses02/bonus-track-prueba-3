@@ -29,8 +29,8 @@ function App() {
     return coincideNombre && coincideTipo
   })
 
-  // logs para debug de filtro (puede quitarse luego)
-  console.log('filtro:', filtro, '->', filtroNormalizado, 'resultados:', eventosFiltrados.length)
+  // calculamos cuantos son gratis para mostrar el contador
+  const cantidadGratis = eventosFiltrados.filter(e => e.esGratuito).length
 
   return (
     <div>
@@ -44,6 +44,10 @@ function App() {
       />
 
       <FiltroTipo filtroActual={filtro} setFiltro={setFiltro} />
+
+      <div className="contador-gratis">
+        <p>Eventos gratuitos: <strong>{cantidadGratis}</strong></p>
+      </div>
 
       <ListaEventos eventos={eventosFiltrados} />
     </div>
