@@ -1,16 +1,43 @@
-# React + Vite
+# README - Agenda Cultural (Bonus Track Prueba 3)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+SPA desarrollada en React (Vite) para la visualización de eventos culturales. Incluye renderizado dinámico, filtrado por categoría, búsqueda controlada por texto y resaltado de eventos gratuitos.
 
-Currently, two official plugins are available:
+## Estructura Principal
+```
+src/
+├── components/
+│   ├── EventoCard.jsx    # Tarjeta de evento individual
+│   ├── ListaEventos.jsx  # Contenedor del listado (map)
+│   └── FiltroTipo.jsx    # Botones para filtro de categoría
+├── data/
+│   └── eventos.js        # Datos locales precargados
+└── App.jsx               # Lógica central y manejo de estados
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Desarrollo por Etapas
 
-## React Compiler
+- **Etapa 1 (Base):** Configuración inicial con Vite y carga del array de datos.
+- **Etapa 2 (Tarjetas):** Creación de `EventoCard` con validación estricta de datos mediante PropTypes.
+- **Etapa 3 (Listado):** Implementación de `ListaEventos` asignando el `id` como *key* única para evitar advertencias en el DOM.
+- **Etapa 4 (Filtros):** Uso de `useState` para búsqueda por texto (input controlado) y selección de categoría, aplicando normalización de strings.
+- **Etapa 5 (Condicionales):** Renderizado condicional para destacar visualmente los eventos gratuitos y agregar un contador dinámico.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Historial de Commits
+Se respetó la nomenclatura solicitada en la evaluación:
 
-## Expanding the ESLint configuration
+- `feat: proyecto base con datos`
+- `feat: componente EventoCard con props y validacion`
+- `feat: renderizado de la lista con key`
+- `feat: filtro y busqueda controlada`
+- `feat: destacar elementos y contador`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Instrucciones de Ejecución
+Para levantar el proyecto en un entorno local:
+
+```bash
+npm install
+npm run dev
+```
+
+**Repositorio:** [https://github.com/Ranses02/bonus-track-prueba-3](https://github.com/Ranses02/bonus-track-prueba-3)

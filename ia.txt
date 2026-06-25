@@ -1,0 +1,180 @@
+REGISTRO DE USO DE IA (GitHub Copilot) — Bonus Track Prueba 3
+================================================================
+
+PARTE A — PLANIFICACION INICIAL
+================================
+
+Prompt: "Sugiere que elementos de React sirven para hacer una agenda cultural con tarjetas, lista y un filtro de busqueda, sin usar local storage."
+
+Utilidad: Parcialmente util.
+
+Lo que hizo Copilot:
+- Genero mucha teoria sobre hooks (useState, useEffect, useContext, useReducer)
+- Sugirio componentes genericos (Card, List, Filter, SearchBar)
+- Menciono alternativas de almacenamiento (localStorage, sessionStorage, Context API)
+
+Lo que yo hice:
+- Analice las sugerencias y seleccione solo lo que aplicaba al caso: useState, props, .map()
+- Defini la arquitectura concreta: App (estado central) → ListaEventos (map) → EventoCard (presentacion)
+- Diseñe la estructura de datos: array de eventos con propiedades especificas (id, nombre, tipo, esGratuito)
+
+Lo que modifique:
+- Descarte las propuestas complejas (useReducer, Context API)
+- Simplifique el flujo de datos usando solo props en lugar de multiples contextos
+- Documente mis decisiones en ANALISIS.md con justificacion pedagogica
+
+---
+
+ETAPA 1 — PROYECTO BASE (10 minutos)
+====================================
+
+Herramientas usadas: Ninguna (Vite + manual)
+
+Lo que hizo Copilot: N/A
+
+Lo que yo hice:
+- Cree el proyecto con npm create vite@latest
+- Instale dependencias: npm install
+- Cree carpetas: src/components/, src/data/
+- Genere eventos.js manualmente con 12 eventos precargados
+- Configure App.jsx con console.log() para verificar datos
+
+Lo que modifique: Nada (creacion manual desde cero)
+
+Commit: "feat: proyecto base con datos"
+
+---
+
+ETAPA 2 — COMPONENTE EVENTOCARD (20 minutos)
+==============================================
+
+Prompt: "Genera la estructura de un componente EventoCard en React que reciba por props nombre, lugar, duracion, tipo, descripcion y fechas. Agregale validacion con PropTypes."
+
+Utilidad: Util (70% reutilizable)
+
+Lo que hizo Copilot:
+- Genero la estructura base del componente con destructuring de props
+- Incluyo PropTypes con .isRequired para cada prop
+- Renderizzo informacion ordenada con etiquetas HTML semanticas
+
+Lo que yo hice:
+- Revise la estructura y valide que fuera correcta
+- Agregue la propiedad esGratuito que Copilot no incluyo
+- Integre comentarios explicativos en el codigo
+
+Lo que modifique:
+- Cambie div a article para semantica HTML correcta
+- Agregue logica condicional para mostrar "GRATIS" cuando esGratuito = true
+- Añadi estilos inline (borde verde) para eventos gratuitos
+- Limpie PropTypes para que esGratuito fuera opcional con defaultProps
+
+Commit: "feat: componente EventoCard con props y validacion"
+
+---
+
+ETAPA 3 — LISTA DE EVENTOS (15 minutos)
+=======================================
+
+Prompt: "Haz el componente ListaEventos. Recibe el array de eventos por props y usa un .map() para renderizar un EventoCard por evento."
+
+Utilidad: Util (80% reutilizable)
+
+Lo que hizo Copilot:
+- Genero .map() basico iterando el array
+- Paso evento.id como key
+- Renderizzo EventoCard con spread de props
+
+Lo que yo hice:
+- Revise que el .map() fuera correcto
+- Valide la asignacion de keys con evento.id
+- Agregue renderizado condicional para "No hay eventos"
+
+Lo que modifique:
+- Asegure que la key usara evento.id (Copilot lo hizo bien, solo lo verifique)
+- Agregue mensaje condicional cuando el array este vacio
+- Pase props individuales a EventoCard en lugar de spread para mayor claridad
+
+Commit: "feat: renderizado de ListaEventos con key usando id"
+
+---
+
+ETAPA 4 — FILTROS Y BUSQUEDA (15 minutos)
+==========================================
+
+Prompt: "Necesito estados para un input de busqueda y un selector de categoria. Filtra el array de eventos en base a ambos."
+
+Utilidad: Parcialmente util (50% reutilizable)
+
+Lo que hizo Copilot:
+- Genero useState para busqueda y filtro
+- Creo logica de filtrado con .filter()
+- Incluyo input controlado y botones de categoria
+
+Lo que yo hice:
+- Revise la logica de filtrado
+- Identifique problemas en la comparacion de strings
+- Diseñe la funcion normalizar() para limpiar acentos
+- Agregue validacion de seguridad con .trim()
+
+Lo que modifique:
+- Separe la limpieza del texto (.trim() y toLowerCase()) por cuenta propia
+- Cree normalizar() para manejar acentos y caracteres especiales
+- Mejore la logica de filtrado para comparar tipos de forma robusta
+- Agregue renderizado condicional del mensaje "No hay eventos"
+- Añadi type="button" a los botones del filtro para evitar submit accidental
+
+Commits: "feat: filtro y busqueda controlada en App" + "fix: filtro - normalizar texto y evitar submit con type=button"
+
+---
+
+ETAPA 5 — DESTACAR GRATIS Y CONTADOR (10 minutos)
+==================================================
+
+Prompt: "En EventoCard, si esGratuito es true, agrega un div que diga GRATIS. En App.jsx, haz un .filter para contar cuantos eventos gratuitos hay en total."
+
+Utilidad: Util (90% reutilizable)
+
+Lo que hizo Copilot:
+- Genero renderizado condicional de etiqueta GRATIS
+- Creo .filter() para contar eventos gratuitos
+- Incluyo estilos basicos para la etiqueta
+
+Lo que yo hice:
+- Revise la logica de filtrado para cantidadGratis
+- Valide el renderizado condicional
+- Diseñe los estilos visuales de la etiqueta y contador
+
+Lo que modifique:
+- Ajuste las clases CSS generadas para mejor integracion visual
+- Mejore la posicion y estilo de la etiqueta GRATIS
+- Agregue estilos de hover en tarjetas y contador con fondo coloreado
+- Cree grid responsivo para tarjetas (.lista-eventos)
+- Añadi transiciones suaves (transform, box-shadow)
+
+Commits: "feat: destacar eventos gratuitos y contador (Etapa 5)" + "style: tarjetas y etiquetas para lista de eventos"
+
+---
+
+CONCLUSION:
+
+
+Uso General de Copilot:
+- 5 prompts principales (1 por etapa + 1 inicial)
+- Prompts especificos y bien definidos
+- Copilot fue util para estructuras base, no para logica compleja
+- Todas las decisiones criticas fueron mias
+
+Filosofia de Desarrollo:
+- Use IA para acelerar boilerplate (componentes, props, estructura)
+- Implemente logica personalizada segun requerimientos especificos
+- Valide y mejore todo codigo generado antes de usar
+- Documente y comente mis decisiones tecnicas
+
+Aprendizaje:
+- IA es util para estructuras repetitivas
+- Siempre requiere revision critica y ajustes
+- Las decisiones de UX/UI fueron 100% personales
+- El flujo de datos y la seguridad son responsabilidad del dev
+
+Fecha: 2026-06-25
+Estado: Proyecto completado con uso consciente de IA y endiendo que cosa esta aplicando esta Herramienta.
